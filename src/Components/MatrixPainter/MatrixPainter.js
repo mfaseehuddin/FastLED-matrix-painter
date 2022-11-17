@@ -5,6 +5,7 @@ export default function MatrixPainter() {
     // FastLED.show();
     const [rows, setRows] = useState(7);
     const [columns, setColumns] = useState(17);
+    const [serpent, setSerpent] = useState(true);
     let matrix = [];
     let counter = 0;
     const [r, setR] = useState(244);
@@ -16,7 +17,7 @@ export default function MatrixPainter() {
             rowArray.push(counter);
             counter++;
         }
-        if (row % 2 === 1) {
+        if (row % 2 === 1 && serpent) {
             rowArray.reverse();
         }
         matrix.push(rowArray);
@@ -65,6 +66,7 @@ export default function MatrixPainter() {
         setR(document.getElementById("r").value);
         setG(document.getElementById("g").value);
         setB(document.getElementById("b").value);
+        setSerpent(document.getElementById("serpent").checked);
         document.getElementById(
             "currentColor"
         ).style.backgroundColor = `rgb(${r},${g},${b})`;
@@ -128,7 +130,16 @@ export default function MatrixPainter() {
                         type="number"
                         id="columns"
                         defaultValue={columns}
+                    />  
+
+                    <label>--serpent:</label>
+                    <input
+                        type="checkbox"
+                        id="serpent"
+                        defaultChecked={serpent}
                     />
+
+
                     <br />
                     <label>r:</label>
                     <input
